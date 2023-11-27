@@ -19,3 +19,13 @@ DOMAIN-SUFFIX,sentry.io
 DOMAIN-SUFFIX,stripe.com
 
 DOMAIN-SUFFIX,perplexity.ai
+
+# 内容：ClaudeAi
+DOMAIN-SUFFIX,claude.ai
+DOMAIN-SUFFIX,anthropic.com
+
+# bing
+DOMAIN-KEYWORD,bing
+
+# google 
+DOMAIN,bard.google.com
