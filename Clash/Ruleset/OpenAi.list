@@ -33,3 +33,4 @@ DOMAIN,bard.google.com
 # jetbrains
 DOMAIN-SUFFIX,jetbrains.com
 DOMAIN-SUFFIX,grazie.ai
+DOMAIN-SUFFIX,grazie.aws.intellij.net
