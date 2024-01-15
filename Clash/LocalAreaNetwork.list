@@ -41,3 +41,7 @@ DOMAIN-SUFFIX,tendawifi.com
 DOMAIN-SUFFIX,zte.home
 DOMAIN-SUFFIX,tplogin.cn
 DOMAIN-SUFFIX,wifi.cmcc
+
+
+# 自用
+IP-CIDR,34.146.63.83/32,no-resolve
