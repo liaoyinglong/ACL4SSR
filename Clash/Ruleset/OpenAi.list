@@ -34,3 +34,7 @@ DOMAIN,bard.google.com
 DOMAIN-SUFFIX,jetbrains.com
 DOMAIN-SUFFIX,grazie.ai
 DOMAIN-SUFFIX,grazie.aws.intellij.net
+
+# 字节跳动
+DOMAIN-SUFFIX,ciciai.com
+DOMAIN-SUFFIX,coze.com
