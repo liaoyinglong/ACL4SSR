@@ -1,6 +1,7 @@
 const url = new URL("https://api.v1.mk/sub");
 
-const subUrl = process.env.URL || process.env.url;
+let subUrl = process.env.URL || process.env.url;
+//subUrl = ``;
 if (!subUrl) {
   console.log("URL is empty");
   process.exit(1);
