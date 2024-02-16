@@ -1,0 +1,4 @@
+.local
+node_modules
+config.local.json
+script/config/*
