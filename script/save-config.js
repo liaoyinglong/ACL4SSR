@@ -53,8 +53,10 @@ async function getRemoteConfig(subUrl) {
 }
 
 async function saveConfig(config, filename) {
+  // 获得 yyyy-mm-dd 格式的日期
+  const time = new Date().toISOString().split("T")[0];
   if (config.status === "fulfilled") {
-    const filePath = path.join(import.meta.dirname, "config", filename);
+    const filePath = path.join(import.meta.dirname, "config", time, filename);
     await fs.ensureFile(filePath);
     await fs.writeFile(filePath, config.value);
     console.log(`save ${filename} done`);
