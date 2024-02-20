@@ -7,6 +7,7 @@ export async function uploadToWrt(filePath) {
   // 上传到路由器
   const remotePath = `/etc/openclash/config/${filename}`;
   await $`scp ${filePath} x-wrt:${remotePath}`;
+  await $`scp ${filePath} x-wrt:/etc/openclash/backup/${filename}`;
 
   const commands = [
     // 设置 openclash 的配置文件路径
@@ -19,3 +20,15 @@ export async function uploadToWrt(filePath) {
 
   await $`ssh x-wrt ${commands}`;
 }
+
+uploadToWrt(
+  path.join(
+    import.meta.dirname,
+    "config",
+    //
+    "2024-02-19",
+    //
+    "ss-raw.yaml",
+  ),
+);
+// console.log(import.meta.dirname);

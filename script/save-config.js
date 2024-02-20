@@ -64,6 +64,7 @@ async function saveConfig(config, filename) {
     // 上传到路由器
     const remotePath = `/etc/openclash/config/${filename}`;
     await $`scp ${filePath} x-wrt:${remotePath}`;
+    await $`scp ${filePath} x-wrt:/etc/openclash/backup/${filename}`;
   } else {
     console.log(`save ${filename} failed`);
     console.error(config.reason);
