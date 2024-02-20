@@ -26,9 +26,11 @@ DOMAIN-SUFFIX,anthropic.com
 
 # bing
 DOMAIN-KEYWORD,bing
+DOMAIN,copilot.microsoft.com
 
 # google 
 DOMAIN,bard.google.com
+DOMAIN,gemini.google.com
 
 # jetbrains
 DOMAIN-SUFFIX,jetbrains.com

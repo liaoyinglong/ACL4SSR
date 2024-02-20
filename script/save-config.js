@@ -7,7 +7,7 @@
  */
 
 import data from "./config.local.json" assert { type: "json" };
-import { fetch, YAML, fs, path } from "zx";
+import { fetch, YAML, fs, path, $ } from "zx";
 
 for (const datum of data) {
   console.group(datum.name);
@@ -60,6 +60,10 @@ async function saveConfig(config, filename) {
     await fs.ensureFile(filePath);
     await fs.writeFile(filePath, config.value);
     console.log(`save ${filename} done`);
+
+    // 上传到路由器
+    const remotePath = `/etc/openclash/config/${filename}`;
+    await $`scp ${filePath} x-wrt:${remotePath}`;
   } else {
     console.log(`save ${filename} failed`);
     console.error(config.reason);

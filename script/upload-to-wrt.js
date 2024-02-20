@@ -1,0 +1,21 @@
+import { $, path } from "zx";
+
+export async function uploadToWrt(filePath) {
+  // 获取到最后一级文件名
+  const filename = path.basename(filePath);
+
+  // 上传到路由器
+  const remotePath = `/etc/openclash/config/${filename}`;
+  await $`scp ${filePath} x-wrt:${remotePath}`;
+
+  const commands = [
+    // 设置 openclash 的配置文件路径
+    `uci set openclash.config.config_path=${remotePath}`,
+    // 提交配置
+    `uci commit openclash`,
+    // 重启 openclash
+    `/etc/init.d/openclash restart`,
+  ].join(" && ");
+
+  await $`ssh x-wrt ${commands}`;
+}
