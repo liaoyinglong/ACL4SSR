@@ -1,4 +1,6 @@
-import { $, path } from "zx";
+import { $, path, fs } from "zx";
+
+const time = new Date().toISOString().split("T")[0];
 
 export async function uploadToWrt(filePath) {
   // 获取到最后一级文件名
@@ -26,9 +28,9 @@ uploadToWrt(
     import.meta.dirname,
     "config",
     //
-    "2024-02-19",
+    time,
     //
-    "ss-raw.yaml",
-  ),
+    "ss-sub.yaml"
+  )
 );
 // console.log(import.meta.dirname);
