@@ -47,7 +47,9 @@ function getSubUrl(subUrl) {
 }
 
 async function getRemoteConfig(subUrl) {
-  const res = await fetch(subUrl);
+  const res = await fetch(subUrl, {
+    timeout: 30 * 1000,
+  });
   const text = await res.text();
   return text;
 }
