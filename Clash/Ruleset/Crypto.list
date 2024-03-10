@@ -300,3 +300,6 @@ DOMAIN-SUFFIX,1inch.io
 
 # > Chippay
 DOMAIN-SUFFIX,chippay.com
+
+# GPT/USDT
+DOMAIN-SUFFIX,qna3.ai
