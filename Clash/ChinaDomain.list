@@ -699,6 +699,9 @@ DOMAIN-SUFFIX,zhipin.com
 DOMAIN-SUFFIX,zhongsou.com
 DOMAIN-SUFFIX,zhuihd.com
 
+# 字节跳动 ai
+DOMAIN-SUFFIX,coze.cn
+DOMAIN-SUFFIX,doubao.com
 
 # self
 DOMAIN-SUFFIX,api.v1.mk
