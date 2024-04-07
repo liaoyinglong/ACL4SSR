@@ -5,6 +5,7 @@ services:
   subconverter:
     image: tindy2013/subconverter:latest
     ports:
-      - "25500:25500"
+      - '25500:25500'
     restart: always
     container_name: subconverter
+    network_mode: host

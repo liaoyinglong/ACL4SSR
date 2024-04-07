@@ -11,6 +11,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@hono/node-server": "^1.9.1",
+    "hono": "^4.2.2",
     "prettier": "^3.2.5",
     "zx": "^7.2.3"
   }
