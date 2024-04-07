@@ -1,6 +1,7 @@
 .local
 node_modules
 config.local.json
+config.local.js
 script/config/*
 .idea
 .vscode

@@ -6,7 +6,7 @@
  * 3. 保存 A
  */
 
-import data from "./config.local.json" assert { type: "json" };
+import data from "./config.local.js" 
 import { fetch, YAML, fs, path, $ } from "zx";
 
 for (const datum of data) {
@@ -24,8 +24,11 @@ for (const datum of data) {
 }
 
 function getSubUrl(subUrl) {
-  const url = new URL("https://api.v1.mk/sub");
+  //const url = new URL("https://api.v1.mk/sub");
+  // 使用自建的订阅转换
+  const url = new URL("http://localhost:25500/sub");
   // Append additional parameters
+  // 参数说明：https://github.com/tindy2013/subconverter/blob/master/README-cn.md#%E8%B0%83%E7%94%A8%E8%AF%B4%E6%98%8E-%E8%BF%9B%E9%98%B6
   url.searchParams.append("target", "clash");
   url.searchParams.append("url", subUrl);
   url.searchParams.append("insert", "false");

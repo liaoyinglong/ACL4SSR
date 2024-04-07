@@ -1,0 +1,10 @@
+version: '3.8'
+# https://s1oz.github.io/post/zi-jian-clash-ding-yue-zhuan-huan-hou-duan-bing-pei-zhi-gui-ze/
+# https://github.com/tindy2013/subconverter/blob/master/README-cn.md
+services:
+  subconverter:
+    image: tindy2013/subconverter:latest
+    ports:
+      - "25500:25500"
+    restart: always
+    container_name: subconverter

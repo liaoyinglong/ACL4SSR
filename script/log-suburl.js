@@ -1,4 +1,4 @@
-import urls from "./config.local.json" assert { type: "json" };
+import urls from "./config.local.js" 
 import { getSubUrl } from "./t2.js";
 
 urls.forEach((item) => {

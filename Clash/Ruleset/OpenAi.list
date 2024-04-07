@@ -40,3 +40,10 @@ DOMAIN-SUFFIX,grazie.aws.intellij.net
 # 字节跳动
 DOMAIN-SUFFIX,ciciai.com
 DOMAIN-SUFFIX,coze.com
+
+# github copilot 企业版
+IP-CIDR,172.67.189.4/24,no-resolve
+DOMAIN-SUFFIX,cocopilot.net
+
+# codeium
+DOMAIN-SUFFIX,codeium.com
