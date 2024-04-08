@@ -40,10 +40,9 @@ async function getHostedSubConfig(rawConfig) {
   const subUrl = getSubUrl(url);
   const subStr = await getRemoteConfig(subUrl);
 
-  const subConfig = YAML.parse(subStr)
-  subConfig.proxies2 = subConfig.proxies
+  const subConfig = YAML.parse(subStr);
+  subConfig.proxies2 = subConfig.proxies;
   subConfig.proxies = obj.proxies;
-
 
   server.close();
   return YAML.stringify(subConfig);
@@ -55,7 +54,7 @@ async function getHostedSubConfig(rawConfig) {
  */
 function hostFlattedConfig(config) {
   const app = new Hono();
-
+  
   app.get('/', (c) => {
     return c.text(config);
   });
@@ -67,7 +66,8 @@ function hostFlattedConfig(config) {
 
   return {
     server,
-    url: `http://localhost:8787`,
+    // 防止 subconverter 缓存
+    url: `http://localhost:8787?time=${Date.now()}`,
   };
 }
 
@@ -80,6 +80,7 @@ async function flatProxyProviders(rawConfig) {
   const r = YAML.parse(rawConfig);
   const proxyProviders = r['proxy-providers'];
   if (proxyProviders) {
+    console.log('拍平 proxy-providers');
     for (const v of Object.values(proxyProviders)) {
       if (v.url) {
         const res = await fetch(v.url);
