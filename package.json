@@ -5,15 +5,18 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "bun run ./ui/index.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@hono/node-server": "^1.9.1",
-    "hono": "^4.2.2",
+    "@clack/prompts": "^0.7.0",
+    "@types/bun": "^1.0.12",
     "prettier": "^3.2.5",
+    "prettier-plugin-organize-imports": "^3.2.4",
+    "prettier-plugin-packagejson": "^2.4.9",
     "zx": "^7.2.3"
   }
 }
