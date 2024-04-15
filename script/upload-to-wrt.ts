@@ -10,24 +10,13 @@ export async function uploadAll() {
     cwd: dir,
     absolute: true,
   });
-  const active = path.join(
-    dir,
-    //
-    'ss-sub.yaml',
-    //"三分机场-sub.yaml"
-    //''
-  );
+  const active = path.join(dir, 'final.yaml');
 
   for (const file of files) {
     if (file.includes('-flat.yaml') || file.includes('combined.yaml')) {
       continue;
     }
-    await uploadToWrt(
-      file,
-
-      //file === active
-      false,
-    );
+    await uploadToWrt(file, file === active);
   }
 }
 
@@ -41,6 +30,8 @@ async function uploadToWrt(filePath, shouldActive = false) {
   await $`scp ${filePath} x-wrt:/etc/openclash/backup/${filename}`;
 
   if (shouldActive) {
+    console.group('begin active ' + filePath);
+
     const commands = [
       // 设置 openclash 的配置文件路径
       `uci set openclash.config.config_path=${remotePath}`,
@@ -51,6 +42,8 @@ async function uploadToWrt(filePath, shouldActive = false) {
     ].join(' && ');
 
     await $`ssh x-wrt ${commands}`;
+
+    console.groupEnd();
   }
 }
 
