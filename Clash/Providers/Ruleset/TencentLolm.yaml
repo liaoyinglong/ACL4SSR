@@ -1,6 +1,4 @@
 payload:
-  # 内容：腾讯Lol手游
-  # 数量：3条
-  - DOMAIN-SUFFIX,riotcdn.net
+  # 内容：腾讯 Lol 手游
+  # 数量：3 条
   - DOMAIN-SUFFIX,wr.pvp.net
-  - DOMAIN-SUFFIX,riotgames.com

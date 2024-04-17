@@ -705,3 +705,6 @@ DOMAIN-SUFFIX,doubao.com
 
 # self
 DOMAIN-SUFFIX,api.v1.mk
+
+# 雷神加速器
+DOMAIN-SUFFIX,leigod.com
