@@ -5,82 +5,98 @@ import { uploadAll } from './upload-to-wrt';
 
 const log = console.log.bind(null);
 
+const day = new Date().toISOString().split('T')[0];
+
+const outDir = path.join(__dirname, 'config', day);
+log(`file will be saved to ${outDir}`);
+
 interface ConfigItem {
   name: string;
   url: string;
 }
 
 async function saveRawToLocal() {
-  const day = new Date().toISOString().split('T')[0];
-
-  const outDir = path.join(__dirname, 'config', day);
-  log(`file will be saved to ${outDir}`);
-
   const all = {
     proxies: [] as any[],
   };
 
-  await Promise.all(
+  const toSubConfigs = await Promise.all(
     (config as ConfigItem[]).map(async (item) => {
       const log = console.log.bind(null, `[${item.name}]: `);
       log(`fetching`, item.url);
       const res = await fetch(item.url);
       const str = await res.text();
-      {
-        log(`fetch done, save raw to local`);
-        const filePath = path.join(outDir, `${item.name}-raw.yaml`);
-        await fs.ensureFile(filePath);
-        await fs.writeFile(filePath, str);
-        log(`write raw done`);
-      }
+      await saveFile(`${item.name}-raw.yaml`, str);
 
       log(`begin to flat proxy-providers`);
       const flatted = await flatProxyProviders(str);
-      {
-        const str = YAML.stringify(flatted);
-        const filePath = path.join(outDir, `${item.name}-flat.yaml`);
-        await fs.ensureFile(filePath);
-        await fs.writeFile(filePath, str);
-        log(`write flat done`);
-      }
+
       log('add to all proxies');
       all.proxies = [...all.proxies, ...flatted.proxies];
+
+      return {
+        ...item,
+        yamlObj: flatted,
+      };
     }),
   );
 
-  const combinedConfig = YAML.stringify(all);
+  const server = startServer();
 
-  {
-    log('save combined proxies');
-    const filePath = path.join(outDir, 'combined.yaml');
-    await fs.ensureFile(filePath);
-    await fs.writeFile(filePath, combinedConfig);
-    log('write combined done');
-  }
+  toSubConfigs.push({
+    url: '',
+    name: 'combined',
+    yamlObj: all,
+  });
 
-  {
-    log('start host combined config');
-    const server = Bun.serve({
-      fetch(req) {
-        return new Response(combinedConfig);
-      },
-      port: 8787,
-    });
-    log('start fetch final config');
-    const subUrl = getSubUrl('http://localhost:8787');
+  for (const item of toSubConfigs) {
+    const yamlStr = YAML.stringify(item.yamlObj);
+    await saveFile(`${item.name}-flat.yaml`, yamlStr);
+
+    log(`start fetch ${item.name} config`);
+    server.setYaml(yamlStr);
+    const subUrl = getSubUrl(`http://localhost:8787?t=${item.name}`);
     const res = await fetch(subUrl);
-    const text = await res.text();
-    log('fetch done, save final to local');
-    const filePath = path.join(outDir, 'final.yaml');
-    await fs.ensureFile(filePath);
-    await fs.writeFile(filePath, text);
-    log('write final done');
-    server.stop();
+    const resText = await res.text();
+    const resObj = YAML.parse(resText);
+    // 重置某些字段为 订阅文件中的配置
+    resObj.dns = item.yamlObj.dns;
+
+    const finalStr = YAML.stringify(resObj);
+    await saveFile(`${item.name}-sub.yaml`, finalStr);
+    log(`write ${item.name} config done`);
   }
 
+  server.stop();
   log('upload all to wrt');
   await uploadAll();
 }
+
+async function saveFile(name: string, str: string) {
+  const filePath = path.join(outDir, name);
+  await fs.ensureFile(filePath);
+  await fs.writeFile(filePath, str);
+}
+
+const startServer = () => {
+  let yamlStr = '';
+  log('start host combined config');
+  const server = Bun.serve({
+    fetch(req) {
+      return new Response(yamlStr);
+    },
+    port: 8787,
+  });
+
+  return {
+    stop() {
+      server.stop();
+    },
+    setYaml(yaml: string) {
+      yamlStr = yaml;
+    },
+  };
+};
 
 /**
  * subconverter 不支持 proxy-providers
@@ -121,7 +137,7 @@ async function flatProxyProviders(rawConfig: string) {
   delete r['proxy-providers'];
   delete r['rules'];
   // 暂时移除，后续看是否有必要开放
-  delete r['dns'];
+  //delete r['dns'];
   return r;
 }
 
