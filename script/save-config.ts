@@ -2,6 +2,7 @@ import { fileURLToPath } from 'bun';
 import config from './config.local';
 import { YAML, fs, path } from 'zx';
 import { uploadAll } from './upload-to-wrt';
+import { validateRules } from './valite-rules';
 
 const log = console.log.bind(null);
 
@@ -68,8 +69,11 @@ async function saveRawToLocal() {
   }
 
   server.stop();
-  log('upload all to wrt');
-  await uploadAll();
+
+  if (await validateRules()) {
+    log('upload all to wrt');
+    await uploadAll();
+  }
 }
 
 async function saveFile(name: string, str: string) {
