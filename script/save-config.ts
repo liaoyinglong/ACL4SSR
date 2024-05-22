@@ -71,9 +71,9 @@ async function saveRawToLocal() {
   server.stop();
 
   if (await validateRules()) {
-    log('upload all to wrt');
-    await uploadAll();
   }
+  log('upload all to wrt');
+  await uploadAll();
 }
 
 async function saveFile(name: string, str: string) {
