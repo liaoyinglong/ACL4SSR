@@ -3,6 +3,7 @@ import config from './config.local';
 import { YAML, fs, path } from 'zx';
 import { uploadAll } from './upload-to-wrt';
 import { validateRules } from './valite-rules';
+import { configMap, server, serverUrl } from './server';
 
 const log = console.log.bind(null);
 
@@ -42,8 +43,6 @@ async function saveRawToLocal() {
     }),
   );
 
-  const server = startServer();
-
   toSubConfigs.push({
     url: '',
     name: 'combined',
@@ -55,8 +54,10 @@ async function saveRawToLocal() {
     await saveFile(`${item.name}-flat.yaml`, yamlStr);
 
     log(`start fetch ${item.name} config`);
-    server.setYaml(yamlStr);
-    const subUrl = getSubUrl(`http://localhost:8787?t=${item.name}`);
+    configMap.set(item.name, yamlStr);
+
+    const subUrl = getSubUrl(`${serverUrl}/config/${item.name}`, true);
+
     const res = await fetch(subUrl);
     const resText = await res.text();
     const resObj = YAML.parse(resText);
@@ -68,11 +69,10 @@ async function saveRawToLocal() {
     log(`write ${item.name} config done`);
   }
 
-  server.stop();
-
   if (await validateRules()) {
   }
   log('upload all to wrt');
+  server.stop();
   await uploadAll();
 }
 
@@ -81,26 +81,6 @@ async function saveFile(name: string, str: string) {
   await fs.ensureFile(filePath);
   await fs.writeFile(filePath, str);
 }
-
-const startServer = () => {
-  let yamlStr = '';
-  log('start host combined config');
-  const server = Bun.serve({
-    fetch(req) {
-      return new Response(yamlStr);
-    },
-    port: 8787,
-  });
-
-  return {
-    stop() {
-      server.stop();
-    },
-    setYaml(yaml: string) {
-      yamlStr = yaml;
-    },
-  };
-};
 
 /**
  * subconverter 不支持 proxy-providers
@@ -145,7 +125,7 @@ async function flatProxyProviders(rawConfig: string) {
   return r;
 }
 
-function getSubUrl(subUrl: string) {
+function getSubUrl(subUrl: string, local = false) {
   //const url = new URL("https://api.v1.mk/sub");
   // 使用自建的订阅转换
   const url = new URL('http://127.0.0.1:25500/sub');
@@ -155,7 +135,9 @@ function getSubUrl(subUrl: string) {
   url.searchParams.append('url', subUrl);
   url.searchParams.append(
     'config',
-    'https://raw.githubusercontent.com/liaoyinglong/ACL4SSR/release/Clash/config/ACL4SSR_Online_Full.ini',
+    local
+      ? `${serverUrl}/Clash/config/ACL4SSR_Online_Full.ini`
+      : 'https://raw.githubusercontent.com/liaoyinglong/ACL4SSR/release/Clash/config/ACL4SSR_Online_Full.ini',
   );
 
   return url.href;

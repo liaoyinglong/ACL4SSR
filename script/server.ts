@@ -1,4 +1,5 @@
 import { Hono } from 'hono';
+import { HTTPException } from 'hono/http-exception';
 import path from 'node:path';
 import { fs } from 'zx';
 const removeGithubUrl = (url: string, p: string = '') => {
@@ -28,5 +29,21 @@ app.get(`/Clash*`, async (c) => {
   const str2 = removeGithubUrl(str, `http://localhost:8787`);
   return c.text(str2);
 });
+const configMap = new Map<string, string>();
+app.get(`/config/:name`, async (c) => {
+  const name = c.req.param('name');
+  const config = configMap.get(name);
+  if (!config) {
+    throw new HTTPException(404, {
+      message: `config ${name} not found, current support: ${[...configMap.keys()]}`,
+    });
+  }
 
-export { server, app };
+  return c.text(config, {
+    headers: {
+      'Cache-Control': 'no-cache',
+    },
+  });
+});
+
+export { server, app, configMap, serverUrl };

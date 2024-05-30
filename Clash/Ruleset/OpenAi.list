@@ -29,7 +29,7 @@ DOMAIN-SUFFIX,perplexity.ai
 
 # chat gpt 用了这个监控
 DOMAIN-SUFFIX,browser-intake-datadoghq.com
-DOMAIN-SUFFIX,0.datadog.pool.ntp.org
+DOMAIN-SUFFIX,datadog.pool.ntp.org
 
 # 内容：ClaudeAi
 DOMAIN-SUFFIX,claude.ai
