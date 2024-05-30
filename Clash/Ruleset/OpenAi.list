@@ -1,6 +1,7 @@
 # 内容：OpenAi
 # 数量：17条
 DOMAIN-KEYWORD,openai
+DOMAIN-KEYWORD,chatgpt
 DOMAIN,gemini.google.com
 DOMAIN-SUFFIX,auth0.com
 DOMAIN-SUFFIX,challenges.cloudflare.com
@@ -21,6 +22,8 @@ DOMAIN-SUFFIX,openai.com.cdn.cloudflare.net
 DOMAIN-SUFFIX,ios.chat.openai.com.cdn.cloudflare.net
 DOMAIN-SUFFIX,sentry.io
 DOMAIN-SUFFIX,stripe.com
+DOMAIN-SUFFIX,chatgpt-async-webps-prod-centralus-1.webpubsub.azure.com
+DOMAIN-SUFFIX,chatgpt-async-webps-prod-eastus-1.webpubsub.azure.com
 
 DOMAIN-SUFFIX,perplexity.ai
 
@@ -45,9 +48,6 @@ DOMAIN-SUFFIX,grazie.aws.intellij.net
 DOMAIN-SUFFIX,ciciai.com
 DOMAIN-SUFFIX,coze.com
 
-# github copilot 企业版
-IP-CIDR,172.67.189.4/24,no-resolve
-DOMAIN-SUFFIX,cocopilot.net
 
 # codeium
 DOMAIN-SUFFIX,codeium.com
