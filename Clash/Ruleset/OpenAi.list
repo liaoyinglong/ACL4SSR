@@ -2,7 +2,6 @@
 # 数量：17条
 DOMAIN-KEYWORD,openai
 DOMAIN-KEYWORD,chatgpt
-DOMAIN,gemini.google.com
 DOMAIN-SUFFIX,auth0.com
 DOMAIN-SUFFIX,challenges.cloudflare.com
 DOMAIN-SUFFIX,chatgpt.com

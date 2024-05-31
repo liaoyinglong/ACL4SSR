@@ -16,11 +16,12 @@ export async function validateRules() {
   const urls = new Set<string>();
   const duplicate = new Set<string>();
   console.log(`开始解析 ${rules.length} 条规则`);
-  
+  console.log(`file: ${file}`);
+
   rules.forEach((rule) => {
-    const url = rule.split(',')[1];
+    const [config, url, group] = rule.split(',');
     if (urls.has(url)) {
-      duplicate.add(url);
+      duplicate.add(`${url} : ${group}`);
     }
     if (url) {
       urls.add(url);
