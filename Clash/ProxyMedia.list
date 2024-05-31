@@ -142,7 +142,6 @@ DOMAIN-SUFFIX,encoretvb.com
 USER-AGENT,FOX%20NOW*
 DOMAIN-SUFFIX,fox.com
 DOMAIN-SUFFIX,foxdcg.com
-DOMAIN-SUFFIX,uplynk.com
 
 # HBO
 USER-AGENT,HBO%20NOW*
@@ -350,7 +349,6 @@ DOMAIN-SUFFIX,oaistatic.com
 DOMAIN-SUFFIX,oaiusercontent.com
 DOMAIN-SUFFIX,openai.com
 DOMAIN-SUFFIX,openaiapi-site.azureedge.net
-DOMAIN-SUFFIX,sentry.io
 DOMAIN-SUFFIX,stripe.com
 
 # PBS

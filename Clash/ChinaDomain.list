@@ -378,7 +378,6 @@ DOMAIN-SUFFIX,qq.com
 DOMAIN-SUFFIX,qqmail.com
 DOMAIN-SUFFIX,qqurl.com
 DOMAIN-SUFFIX,smtcdns.com
-DOMAIN-SUFFIX,smtcdns.net
 DOMAIN-SUFFIX,soso.com
 DOMAIN-SUFFIX,tencent-cloud.net
 DOMAIN-SUFFIX,tencent.com
@@ -703,7 +702,6 @@ DOMAIN-SUFFIX,zhuihd.com
 DOMAIN-SUFFIX,coze.cn
 DOMAIN-SUFFIX,doubao.com
 
-# self
 DOMAIN-SUFFIX,api.v1.mk
 
 # 雷神加速器
