@@ -10,8 +10,8 @@ export async function uploadAll() {
     cwd: dir,
     absolute: true,
   });
-  //const active = path.join(dir, 'combined-sub.yaml');
-  const active = path.join(dir, 'ss-sub.yaml');
+  const active = path.join(dir, 'combined-sub.yaml');
+  //const active = path.join(dir, 'ss-sub.yaml');
 
   for (const file of files) {
     if (file.includes('-flat.yaml')) {
