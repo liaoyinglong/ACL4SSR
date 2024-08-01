@@ -35,6 +35,9 @@ async function saveRawToLocal() {
 
       log('add to all proxies');
       all.proxies = [...all.proxies, ...flatted.proxies];
+      if (flatted.dns && !(all as any).dns) {
+        (all as any).dns = flatted.dns;
+      }
 
       return {
         ...item,
