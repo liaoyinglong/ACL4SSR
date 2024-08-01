@@ -310,3 +310,10 @@ DOMAIN-SUFFIX,brave.com
 
 # io.net
 DOMAIN-SUFFIX,io.net
+DOMAIN-SUFFIX,io.solutions
+
+# trust wallet
+DOMAIN-SUFFIX,trustwallet.com
+
+# Metamask 
+DOMAIN-SUFFIX,metamask.io
