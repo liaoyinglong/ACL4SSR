@@ -317,3 +317,7 @@ DOMAIN-SUFFIX,trustwallet.com
 
 # Metamask 
 DOMAIN-SUFFIX,metamask.io
+
+# wallet connect 
+DOMAIN-SUFFIX,walletconnect.org
+DOMAIN-SUFFIX,web3modal.org
