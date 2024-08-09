@@ -3,5 +3,6 @@ node_modules
 config.local.json
 config.local.js
 script/config/*
+script-new/config/*
 .idea
 .vscode

@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "noEmit": true,
+    "moduleResolution": "NodeNext",
+
+    "module": "Node16",
+    "target": "ESNext",
+    "allowImportingTsExtensions": true
+  }
+}

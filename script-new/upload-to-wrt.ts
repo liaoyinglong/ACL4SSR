@@ -1,27 +1,24 @@
 import { fileURLToPath } from 'bun';
 import { $, path, fs, globby } from 'zx';
+import { config, outDir } from './shared.ts';
 
-const time = new Date().toISOString().split('T')[0];
-
-export async function uploadAll(activeConfig = 'combined-sub.yaml') {
-  const dir = path.join(import.meta.dirname, 'config', time);
-
+export async function uploadAll() {
   const files = globby.globbySync('**/*.yaml', {
-    cwd: dir,
+    cwd: outDir,
     absolute: true,
   });
-  const active = path.join(dir, activeConfig);
+  const active = path.join(outDir, 'final-config.yaml');
   //const active = path.join(dir, 'ss-sub.yaml');
 
   for (const file of files) {
-    if (file.includes('-flat.yaml')) {
+    if (file.includes('-flat.yaml') || file.includes('all-proxies.yaml')) {
       continue;
     }
     await uploadToWrt(file, file === active);
   }
 }
 
-async function uploadToWrt(filePath, shouldActive = false) {
+export async function uploadToWrt(filePath, shouldActive = false) {
   // 获取到最后一级文件名
   const filename = path.basename(filePath);
 
