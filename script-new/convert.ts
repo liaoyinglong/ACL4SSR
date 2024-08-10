@@ -96,8 +96,9 @@ export async function convert() {
     log(`add ${v.name} rules`);
     proxyGroups.push({
       ...urlTestConfig,
+      type: 'select',
       name: v.name,
-      proxies: Object.keys(groupedProxies).concat('AUTO', 'DIRECT'),
+      proxies: Object.keys(groupedProxies).concat('AUTO'),
     });
     rules.push(...v.rules.map((rule) => `${rule},${v.name}`));
   });
@@ -115,7 +116,11 @@ export async function convert() {
   );
   finalConfig.rules = rules;
   log(`total rules: ${rules.length}`);
+  await saveFile('final-dns-config.yaml', YAML.stringify(finalConfig));
+  // 删除 dns 配置后，再写入 final-config.yaml
+  delete finalConfig.dns;
   await saveFile('final-config.yaml', YAML.stringify(finalConfig));
+
   log(`write final-config.yaml`);
 }
 
