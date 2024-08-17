@@ -7,7 +7,7 @@ export async function uploadAll() {
     cwd: outDir,
     absolute: true,
   });
-  const active = path.join(outDir, 'final-config.yaml');
+  const active = path.join(outDir, 'final-dns-config.yaml');
   //const active = path.join(dir, 'ss-sub.yaml');
 
   for (const file of files) {
