@@ -1,4 +1,6 @@
-export const game = {
+import type { Rule } from './type.ts';
+
+export const game: Rule = {
   name: 'game',
   rules: [
     // 拳头

@@ -1,4 +1,6 @@
-export const ai = {
+import type { Rule } from './type.ts';
+
+export const ai: Rule = {
   name: 'ai',
   rules: [
     'DOMAIN-KEYWORD,openai',

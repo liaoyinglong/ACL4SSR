@@ -5,7 +5,7 @@ import { config, outDir, saveFile } from './shared.ts';
 const log = console.log.bind(null, '[download]: ');
 log(`file will be saved to ${outDir}`);
 // 保存到本地
-export async function fetchConfigs() {
+export async function downloadConfigs() {
   let allProxies = [];
   const arr = await Promise.all(
     config.map(async (item) => {
@@ -74,6 +74,6 @@ async function flatProxyProviders(rawConfig: string) {
 if (import.meta.url.startsWith('file:')) {
   const modulePath = fileURLToPath(import.meta.url);
   if (process.argv[1] === modulePath) {
-    await fetchConfigs();
+    await downloadConfigs();
   }
 }

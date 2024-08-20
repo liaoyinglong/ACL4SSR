@@ -4,6 +4,7 @@ import { config, outDir, saveFile } from './shared.ts';
 import { ai } from './rules/ai.ts';
 import { crypto } from './rules/crypto.ts';
 import { game } from './rules/game.ts';
+import { tg } from './rules/tg.ts';
 
 const log = console.log.bind(null, '[convert]: ');
 
@@ -92,7 +93,14 @@ export async function convert() {
 
   const rules = [];
 
-  [ai, crypto, game].forEach((v) => {
+  const ruleConfigs = [ai, crypto, game, tg];
+  for (const v of ruleConfigs) {
+    if (typeof v.rules === 'function') {
+      const r = await v.rules();
+      rules.push(...r);
+    } else {
+      rules.push(...v.rules.map((rule) => `${rule},${v.name}`));
+    }
     log(`add ${v.name} rules`);
     proxyGroups.push({
       ...urlTestConfig,
@@ -100,8 +108,7 @@ export async function convert() {
       name: v.name,
       proxies: Object.keys(groupedProxies).concat('AUTO'),
     });
-    rules.push(...v.rules.map((rule) => `${rule},${v.name}`));
-  });
+  }
 
   // 写入兜底规则
   rules.push(

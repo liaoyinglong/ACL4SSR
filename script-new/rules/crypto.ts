@@ -1,4 +1,6 @@
-export const crypto = {
+import type { Rule } from './type.ts';
+
+export const crypto: Rule = {
   name: 'crypto',
   rules: [
     //# > Exchange

@@ -4,11 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-dependencies:
-  hono:
-    specifier: ^4.4.0
-    version: 4.4.0
-
 devDependencies:
   '@clack/prompts':
     specifier: ^0.7.0
@@ -16,6 +11,12 @@ devDependencies:
   '@types/bun':
     specifier: ^1.0.12
     version: 1.0.12
+  consola:
+    specifier: ^3.2.3
+    version: 3.2.3
+  hono:
+    specifier: ^4.4.0
+    version: 4.4.0
   prettier:
     specifier: ^3.2.5
     version: 3.2.5
@@ -140,6 +141,11 @@ packages:
   /chalk@5.3.0:
     resolution: {integrity: sha512-dLitG79d+GV1Nb/VYcCDFivJeK1hiukt9QjRNVOsUtTy1rR1YJsmpGGTZ3qJos+uw7WmWF4wUwBd9jxjocFC2w==}
     engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
+    dev: true
+
+  /consola@3.2.3:
+    resolution: {integrity: sha512-I5qxpzLv+sJhTVEoLYNcTW+bThDCPsit0vLNKShZx6rLtpilNpmmeTPaeqJb9ZE9dV3DGaeby6Vuhrw38WjeyQ==}
+    engines: {node: ^14.18.0 || >=16.10.0}
     dev: true
 
   /data-uri-to-buffer@4.0.1:
@@ -271,7 +277,7 @@ packages:
   /hono@4.4.0:
     resolution: {integrity: sha512-Bb2GHk8jmlLIuxc3U+7UBGOoA5lByJTAFnRdH2N2fqEVy9TEQzJ9saIJUQ/ZqBvEvgEFe7UjPFNSFi8cyeU+3Q==}
     engines: {node: '>=16.0.0'}
-    dev: false
+    dev: true
 
   /ignore@5.3.1:
     resolution: {integrity: sha512-5Fytz/IraMjqpwfd34ke28PTVMjZjJG2MPn5t7OE4eUCUNf8BAa7b5WUS9/Qvr6mwOQS7Mk6vdsMno5he+T8Xw==}
